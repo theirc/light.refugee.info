@@ -1,5 +1,5 @@
 {
-  "name": "web.refugee.info",
+  "name": "light.refugee.info",
   "version": "1.0.0",
   "description": "Installing ----------------------",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/theirc/web.refugee.info.git"
+    "url": "git+https://github.com/theirc/light.refugee.info.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/theirc/web.refugee.info/issues"
+    "url": "https://github.com/theirc/light.refugee.info/issues"
   },
-  "homepage": "https://github.com/theirc/web.refugee.info#readme",
+  "homepage": "https://github.com/theirc/light.refugee.info#readme",
   "devDependencies": {
     "chai": "^3.5.0"
   }
