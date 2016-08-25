@@ -5,3 +5,6 @@ __pycache__
 *.py[co]
 node_modules/
 bower_components/
+localsettings.py
+/static/
+.sass-cache

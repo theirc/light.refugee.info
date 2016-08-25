@@ -1,0 +1,23 @@
+{
+  "name": "light.refugee.info",
+  "version": "1.0.0",
+  "description": "Installing ----------------------",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm install bower -g; bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theirc/light.refugee.info.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theirc/light.refugee.info/issues"
+  },
+  "homepage": "https://github.com/theirc/light.refugee.info#readme",
+  "devDependencies": {
+    "chai": "^3.5.0"
+  }
+}
