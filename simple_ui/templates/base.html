@@ -1,5 +1,6 @@
 {% load static %}
 {% load compress %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -10,7 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="description" content="Important information for refugees."/>
     <script type="text/javascript" src='{% static 'jquery/dist/jquery.js' %}'></script>
-
+        <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}">
     {% compress css %}
         <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/main.scss' %}">
     {% endcompress %}
@@ -22,13 +23,11 @@
 
     <title>{% block title %}RefugeeInfo{% endblock title %}</title>
 </head>
-<body>
+<body class="language-{{ LANGUAGE_CODE }}">
     {% block body %}
-        <div class="container">
-            <div class="row">
-                {% block content %}{% endblock content %}
-            </div>
-        </div>
+        {% include 'navigation.html' %}
+            {% block content %}{% endblock content %}
+        {% include 'footer.html' %}
     {% endblock body %}
 </body>
 </html>
