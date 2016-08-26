@@ -1,85 +1,97 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
-<!doctype html>
-<!--[if lt IE 7]>      <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en" class="">  <!--<![endif]-->
-<head>
-    <!-- Meta info -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width" name="viewport">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="description" content="Important information for refugees in {{ location.name }}"/>
+{% load tz %}
+{% load l10n %}
+{% block content %}
+    <div id="container">
+        {% for b in location.metadata.banners %}
+            <div class="banner">
+                {{ b|safe }}
+            </div>
+        {% endfor %}
+        <h1 class="page-title">{{ location.metadata.page_title }}</h1>
+        {% if has_important %}
+            <table class="toc important">
+                {% for p in location.content %}
+                    {% if p.important %}
+                        <tr>
+                            <td>
+                                {% if p.image %}
+                                    <img src="{{ p.image }}" class="title-icon"/>
+                                {% endif %}
+                            </td>
+                            <td><a href="#{% if p.anchor_name %}{{ p.anchor_name }}{% else %}Anchor_{{ p.index }}{% endif %}">{{ p.title }}</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        {% endif %}
+        <table class="toc">
+            {% for p in location.content %}
+                {% if not p.important %}
+                    <tr>
+                        <td>
+                            {% if p.image %}
+                                <img src="{{ p.image }}" class="title-icon"/>
+                            {% else %}&nbsp;
+                            {% endif %}
 
-    <title>RefugeeInfo</title>
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                        </td>
+                        <td><a href="#{% if p.anchor_name %}{{ p.anchor_name }}{% else %}Anchor_{{ p.index }}{% endif %}">{{ p.title }}</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td>&nbsp;
+                </td>
+                <td>
+                    <a href="#OtherLocations">{% trans "OTHER LOCATIONS" %}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                </td>
+                <td>
+                    <a href="#Feedback">{% trans "FEEDBACK" %}</a>
+                </td>
+            </tr>
+        </table>
+        {% if publication_date %}
+            <em class="last-updated" data-date="{{ publication_date|utc|date:'c' }}">
+                {% trans "Last updated on:" %} {{ publication_date|utc|localize }} UTC
+            </em>
+        {% endif %}
+        {% for c in location.content %}
+            <div>
+                <div class="section-header{% if c.important %} important{% endif %}{% if c.inherited %} inherited{% endif %}">
+                    <h3 class="anchor">
+                        {% if c.image %}
+                            <img src="{{ c.image }}" class="title-icon"/>
+                        {% endif %} &nbsp;
+                        <a name="{% if c.anchor_name %}{{ c.anchor_name }}{% else %}Anchor_{{ c.index }}{% endif %}">{{ c.title }}</a><br/>
+                        <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
+                    </h3>
+                    <hr class="title-hr"/>
+                </div>
+                {{ c.section|safe }}
+            </div>
+        {% endfor %}
+    </div>
+    <div>
+        <h3 class="anchor">
+            <a name="OtherLocations">{% trans "OTHER LOCATIONS" %}</a><br>
+            <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
+        </h3>
+        <hr class="title-hr" style="margin-bottom: 1em;"/>
+        <a class="link-button" href="/?language={{ LANGUAGE_CODE }}">{% trans "VIEW INFO ON OTHER LOCATIONS" %}</a>
 
-        ga('create', 'UA-68574649-1', 'auto');
-        ga('send', 'pageview');
-    </script>
-
-    <!-- Facebook Pixel Code -->
-    <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq)return;
-            n = f.fbq = function () {
-                n.callMethod ?
-                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq)f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-
-        fbq('init', '1552280281734984');
-        fbq('track', "PageView");</script>
-    <noscript><img height="1" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=1033326163421975&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->
-
-    <meta name="msapplication-TileColor" content="#000000">
-    <meta name="msapplication-TileImage" content="{{ cons.path.favicons }}/mstile-144x144.png">
-    <meta name="theme-color" content="#000000">
-    <link rel="stylesheet" href="{% static "css/site.css" %}"/>
-
-    <!-- Font and Styles -->
-    <style>
-        /*
-        Here for now because updating cloudfront is a nightmare
-        */
-        .click-here {
-            color: white;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body class="content-page {% if is_blue %} blue-content{% endif %}">
-{% include "content/header.html" %}
-
-{% include "content/content.html" %}
-{% include "footer.html" %}
-</body>
-</html>
+        <h3 class="anchor">
+            <a name="Feedback">{% trans "FEEDBACK" %}</a><br>
+            <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
+        </h3>
+        <hr class="title-hr" style="margin-bottom: 1em;"/>
+        <a class="link-button"
+           href="{{ feedback_url }}">{% trans "GIVE FEEDBACK ON THIS PAGE" %}</a>
+    </div>
+{% endblock content %}

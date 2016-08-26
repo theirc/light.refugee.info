@@ -1,0 +1,37 @@
+{% load static %}
+{% load i18n %}
+
+<div class="logo-bar-container">
+    <div style="width: 100%; text-align: center">
+        <a href="/?language={{ LANGUAGE_CODE }}">
+            <img src="{% static "images/wordmark.png" %}"/>
+        </a>
+    </div>
+    <hr/>
+    <div class="language-wrapper language-en">
+        <ul class="languages detailed-languages">
+            {% language 'en' %}
+                <li><a href="?language=en">{% trans "English" %}</a></li>
+            {% endlanguage %}
+            {% language 'ar' %}
+                <li><a href="?language=ar">{% trans "Arabic" %}</a></li>
+            {% endlanguage %}
+            {% language 'fa' %}
+                <li><a href="?language=fa">{% trans "Farsi" %}</a></li>
+            {% endlanguage %}
+        </ul>
+
+        <ul class="languages short-languages">
+            <li>{% trans "Languages" %}
+                <ul>
+                    {% for k, v in LANGUAGES %}
+                        {% language k %}
+                            <li><a href="/?language={{ k }}">{% trans v %}</a></li>
+                        {% endlanguage %}
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <hr/>
+</div>
