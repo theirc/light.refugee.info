@@ -3,51 +3,43 @@
 {% load i18n %}
 {% load tz %}
 {% block content %}
-{% if closest %}
-    <h3>{% trans "Closest location:" %}</h3>
-    <ul class="locations  white">
-        <li onclick="location.href='/{{ closest.slug }}/?language={{ LANGUAGE_CODE }}/'">
-            {% trans "View info for" %}: <br/>
-            {% firstof closest.title closest.metadata.page_title closest.name %}
-            {% if closest.distance %}
-                <span style="direction: ltr">({{ closest.distance|floatformat }} km)</span>
-            {% endif %}
-        </li>
-    </ul>
-{% endif %}
-<h3>{% trans "Other locations available:" %}</h3>
-{% for r in regions %}
-    {% if r.children or not r.hidden %}
-        <ul class="locations">
-            <li onclick="$('.locations.children').slideUp(); $('#region{{ r.id }}').slideDown()">{% firstof r.title  r.metadata.page_title r.name %}
+    {% if closest %}
+        <h3>{% trans "Closest location:" %}</h3>
+        <ul class="locations white">
+            <li>
+                <a href="/{{ closest.slug }}/?language={{ LANGUAGE_CODE }}/">
+                    {% trans "View info for" %}: <br/>
+                    {% firstof closest.title closest.metadata.page_title closest.name %}
+                    {% if closest.distance %}
+                        <span style="direction: ltr">({{ closest.distance|floatformat }} km)</span>
+                    {% endif %}
+                </a>
             </li>
         </ul>
-
-        <ul class="locations children white" id="region{{ r.id }}" style="display: none">
-            {% if not r.hidden %}
-                <li onclick="location.href='/{{ r.slug }}/?language={{ LANGUAGE_CODE }}/'">
-                    {% trans "View info for" %}:<br/>{% firstof r.title r.metadata.page_title r.name %}
-                </li>
-            {% endif %}
-            {% if r.children %}
-                {% for c in r.children %}
-                    <li onclick="location.href='/{{ c.slug }}/?language={{ LANGUAGE_CODE }}/'">
-                        {% trans "View info for" %}:<br/>{% firstof c.title c.metadata.page_title c.name %}</li>
-                {% endfor %}
-            {% endif %}
-        </ul>
     {% endif %}
-
-{% endfor %}
-<hr/>
-<ul class="locations">
-    <li onclick="detectLocation()">{% trans "Detect my location" %}</li>
-</ul>
-<hr/>
-
-<img src="/imaging/logo-bar/" alt="IRC | MercyCorps"/>
-<hr/>
-<ul class="locations">
-    <li><a href="/acknowledgements/">{% trans "Acknowledgements" %}</a></li>
-</ul>
+    <h3>{% trans "Other locations available:" %}</h3>
+    {% for r in regions %}
+        {% if r.children or not r.hidden %}
+            <ul class="locations drop-down-list">
+                <li>{% firstof r.title  r.metadata.page_title r.name %}
+                    <ul class="locations white" id="region{{ r.id }}">
+                        {% if not r.hidden %}
+                            <li><a href="/{{ r.slug }}/?language={{ LANGUAGE_CODE }}/">{% trans "View info for" %}:<br/>{% firstof r.title r.metadata.page_title r.name %}</a></li>
+                        {% endif %}
+                        {% if r.children %}
+                            {% for c in r.children %}
+                                <li><a href="/{{ c.slug }}/?language={{ LANGUAGE_CODE }}/">{% trans "View info for" %}:<br/>{% firstof c.title c.metadata.page_title c.name %}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        {% endif %}
+    {% endfor %}
+    <hr/>
+    <img src="/imaging/logo-bar/" alt="IRC | MercyCorps"/>
+    <hr/>
+    <ul class="locations">
+        <li><a href="/acknowledgements/">{% trans "Acknowledgements" %}</a></li>
+    </ul>
 {% endblock content %}

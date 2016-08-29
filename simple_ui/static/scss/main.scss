@@ -70,3 +70,42 @@ $screen-md-max: ($screen-lg-min - 1);
   -ms-flex-direction: $value;
   flex-direction: $value;
 }
+
+ul.locations {
+  text-align: center;
+  display: inline-block;
+  padding: 0 0;
+  margin: 0 0;
+  list-style: none;
+  width: 100%;
+  li {
+    display: block;
+    border: 1px white solid;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 5px;
+    padding: 10px 0;
+    text-align: center;
+    text-overflow: clip
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+  &.drop-down-list {
+    ul {
+      display: none;
+    }
+    li:hover ul {
+      display: block;
+      padding-top: 15px;
+    }
+  }
+  &.white li {
+    background-color: #fff;
+    a {
+      color: #000;
+    }
+  }
+}
