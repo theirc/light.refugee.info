@@ -7,7 +7,7 @@
         <h3>{% trans "Closest location:" %}</h3>
         <ul class="locations white">
             <li>
-                <a href="/{{ closest.slug }}/?language={{ LANGUAGE_CODE }}/">
+                <a href="/{{ closest.slug }}/">
                     {% trans "View info for" %}: <br/>
                     {% firstof closest.title closest.metadata.page_title closest.name %}
                     {% if closest.distance %}
@@ -24,11 +24,11 @@
                 <li>{% firstof r.title  r.metadata.page_title r.name %}
                     <ul class="locations white" id="region{{ r.id }}">
                         {% if not r.hidden %}
-                            <li><a href="/{{ r.slug }}/?language={{ LANGUAGE_CODE }}/">{% trans "View info for" %}:<br/>{% firstof r.title r.metadata.page_title r.name %}</a></li>
+                            <li><a href="/{{ r.slug }}/">{% trans "View info for" %}:<br/>{% firstof r.title r.metadata.page_title r.name %}</a></li>
                         {% endif %}
                         {% if r.children %}
                             {% for c in r.children %}
-                                <li><a href="/{{ c.slug }}/?language={{ LANGUAGE_CODE }}/">{% trans "View info for" %}:<br/>{% firstof c.title c.metadata.page_title c.name %}</a></li>
+                                <li><a href="/{{ c.slug }}/">{% trans "View info for" %}:<br/>{% firstof c.title c.metadata.page_title c.name %}</a></li>
                             {% endfor %}
                         {% endif %}
                     </ul>
