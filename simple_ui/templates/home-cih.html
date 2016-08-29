@@ -20,20 +20,41 @@
     <h3>{% trans "Other locations available:" %}</h3>
     {% for r in regions %}
         {% if r.children or not r.hidden %}
-            <ul class="locations drop-down-list">
-                <li>{% firstof r.title  r.metadata.page_title r.name %}
-                    <ul class="locations white" id="region{{ r.id }}">
-                        {% if not r.hidden %}
-                            <li><a href="/{{ r.slug }}/">{% trans "View info for" %}:<br/>{% firstof r.title r.metadata.page_title r.name %}</a></li>
-                        {% endif %}
-                        {% if r.children %}
-                            {% for c in r.children %}
-                                <li><a href="/{{ c.slug }}/">{% trans "View info for" %}:<br/>{% firstof c.title c.metadata.page_title c.name %}</a></li>
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
-                </li>
-            </ul>
+            <div class="location-accordion">
+                <ul>
+                    <li>
+                        <input type="checkbox" id="checkbox-{{ r.id }}" name="checkbox-accordion"/>
+                        <label for="checkbox-{{ r.id }}">{% firstof r.title  r.metadata.page_title r.name %}</label>
+                        <div class="content">
+                            {% if not r.hidden %}
+                                <a class="location location-country" href="/{{ r.slug }}/?language={{ LANGUAGE_CODE }}/">
+                                    <span class="location-helper">{% trans "View info for" %}</span>
+                                    <span class="location-name">{% firstof r.title r.metadata.page_title r.name %}</span>
+                                </a>
+                            {% endif %}
+                            {% if r.children %}
+                                {% for c in r.children %}
+                                    {% if c.level == 2  %}
+                                        <a class="location location-region" href="/{{ c.slug }}/?language={{ LANGUAGE_CODE }}/">
+                                            <span class="location-helper">{% trans "View info for" %}</span>
+                                            <span class="location-name">{% firstof c.title c.metadata.page_title c.name %}</span>
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for c in r.children %}
+                                    {% if c.level == 3  %}
+                                        <a class="location location-camp" href="/{{ c.slug }}/?language={{ LANGUAGE_CODE }}/">
+                                            <span class="location-helper">{% trans "View info for" %}</span>
+                                            <span class="location-name">{% firstof c.title c.metadata.page_title c.name %}</span>
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
         {% endif %}
     {% endfor %}
     <hr/>

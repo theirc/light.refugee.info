@@ -1,12 +1,12 @@
 $green-accent-color: #00BA50;
 $green-accent-color-dark: #27a442;
 $green-accent-color-light: #59c06c;
-
 $yellow-accent-color: #FFDF0C;
-$primary-color: #F4F5F6;
-$primary-color-2: #EEEEEE;
-$primary-color-3: #FFFFFF;
-$primary-color-4: #FFFFFF;
+
+$country-button-color: #F4F5F6;
+$location-header-color: #EEEEEE;
+$navbar-color: #FFFFFF;
+$main-container-color: #FFFFFF;
 $primary-color-5: #DDDDDD;
 $primary-color-6: #CCCCCC;
 $divider-color: #E2E2E2;
@@ -14,7 +14,6 @@ $divider-color-2: #BABABA;
 $divider-color-3: #f6f6f6;
 $text-color: #000000;
 $text-color-muted: #454545;
-$background-image: '../images/white-background.jpg';
 
 // bootstrap responsive layout breakpoints
 $screen-sm-min: 768px;
@@ -24,12 +23,13 @@ $screen-sm-max: ($screen-md-min - 1);
 $screen-lg-min: 1200px;
 $screen-md-max: ($screen-lg-min - 1);
 
-@mixin transition-mixin($property, $duration) {
-  -webkit-transiton: $property #{$duration}s;
-  -moz-transition: $property #{$duration}s;
-  -ms-transition: $property #{$duration}s;
-  -o-transition: $property #{$duration}s;
-  -transition: $property #{$duration}s;
+@mixin transition-mixin($property, $duration, $ease) {
+  -webkit-transiton: $property #{$duration}s $ease;
+  -moz-transition: $property #{$duration}s $ease;
+  -ms-transition: $property #{$duration}s $ease;
+  -o-transition: $property #{$duration}s $ease;
+  -transition: $property #{$duration}s $ease;
+  transition: $property #{$duration}s $ease;
 }
 
 @mixin flexbox() {
@@ -71,6 +71,16 @@ $screen-md-max: ($screen-lg-min - 1);
   flex-direction: $value;
 }
 
+html, body {
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+  color: $text-color;
+}
+
+a {
+  text-decoration: none;
+  color: $text-color;
+}
+
 ul.locations {
   text-align: center;
   display: inline-block;
@@ -108,4 +118,100 @@ ul.locations {
       color: #000;
     }
   }
+}
+
+// accordion
+
+.location-accordion {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul li {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+  }
+  label {
+    @include flexbox();
+    @include justify-content(center);
+    @include align-items(center);
+    background-color: $country-button-color;
+    border-top: 1px solid $divider-color;
+    color: $text-color;
+    text-decoration: none;
+    padding: 0;
+    height: 40px;
+    cursor: pointer;
+    font-size: 14px;
+    &:hover {
+      background-color: darken($country-button-color, 5%);
+    }
+  }
+  .content {
+    @include transition-mixin(all, 1.0, ease-out);
+    height: 0;
+  }
+
+  [type=radio], [type=checkbox] {
+    display: none;
+  }
+
+  [type=checkbox]:checked ~ label ~ .content {
+    height: auto;
+    .location-helper {
+      display: block;
+      position: absolute;
+      @media (max-width: $screen-xs-max) {
+        display: none;
+      }
+    }
+  }
+
+  .location-helper {
+    font-size: 12px;
+    display: none;
+    text-transform: uppercase;
+
+  }
+
+  .location-name {
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+
+  a.location {
+    @include flexbox();
+    @include justify-content(flex-start);
+    @include align-items(center);
+    text-overflow: clip;
+    height: 40px;
+    padding: 0 15px;
+    font-size: 14px;
+  }
+
+  a.location-country {
+    background-color: $primary-color-5;
+    &:hover {
+      background-color: darken($primary-color-5, 5%);
+    }
+  }
+
+  a.location-region {
+    background-color: $divider-color;
+    &:hover {
+      background-color: darken($divider-color, 5%);
+    }
+  }
+
+  a.location-camp {
+    background-color: $divider-color-3;
+    &:hover {
+      background-color: darken($divider-color-3, 5%);
+    }
+  }
+
 }
