@@ -216,8 +216,8 @@ def acknowledgements(request):
 def find_language(request, language=None):
     if language:
         user_language = language[0:2]
-    elif 'language' in request.GET:
-        user_language = request.GET['language'][0:2]
+    elif request.LANGUAGE_CODE:
+        user_language = request.LANGUAGE_CODE
     elif 'HTTP_ACCEPT_LANGUAGE' in request.META:
         accept_language = request.META['HTTP_ACCEPT_LANGUAGE'].split(',')
         user_language = accept_language[0].split('-')

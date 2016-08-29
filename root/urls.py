@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 
 urlpatterns = [
                   url(r'^imaging/', include('imaging.urls')),
                   url(r'^', include('rss_ui.urls')),
-                  url(r'^', include('simple_ui.urls')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += i18n_patterns(
+                    url(r'^', include('simple_ui.urls'))
+                )
 
 handler404 = 'root.views.redirect_to_home'
