@@ -24,11 +24,9 @@ $screen-lg-min: 1200px;
 $screen-md-max: ($screen-lg-min - 1);
 
 @mixin transition-mixin($property, $duration, $ease) {
-  -webkit-transiton: $property #{$duration}s $ease;
+  -webkit-transition: $property #{$duration}s $ease;
   -moz-transition: $property #{$duration}s $ease;
-  -ms-transition: $property #{$duration}s $ease;
   -o-transition: $property #{$duration}s $ease;
-  -transition: $property #{$duration}s $ease;
   transition: $property #{$duration}s $ease;
 }
 
@@ -72,56 +70,439 @@ $screen-md-max: ($screen-lg-min - 1);
 }
 
 html, body {
+  margin: 0;
+  padding: 0;
   font-family: 'Montserrat', Helvetica, Arial, sans-serif;
   color: $text-color;
+  background-color: $country-button-color;
+  font-size: 14px;
+  line-height: 1.4285;
 }
 
 a {
   text-decoration: none;
   color: $text-color;
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+    color: $text-color-muted;
+  }
 }
 
-ul.locations {
-  text-align: center;
-  display: inline-block;
-  padding: 0 0;
-  margin: 0 0;
-  list-style: none;
+p {
+  margin: 0 0 10px;
+}
+// navbar
+.navbar {
+  background-color: $navbar-color;
+  height: 50px;
+  z-index: 1001;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  @media (min-height: $screen-sm-min) {
+    padding: 24px 0 0 0;
+    height: 80px;
+  }
+}
+
+.navbar-inner {
+  @include flexbox();
+  @include justify-content(space-between);
+  padding-top: 5px;
+}
+
+.navbar-left {
+  .about-us, .give-feedback {
+    text-decoration: underline;
+    padding: 0 2px;
+  }
+}
+
+.logo-container {
+  @include flexbox();
+  @include justify-content(center);
+  position: absolute;
+  width: 100%;
+}
+
+.logo-bar-container {
+  @include flexbox();
+  @include justify-content(center);
+}
+
+.logo-bar {
+  max-height: 25px;
+}
+
+.refugee-logo {
+  max-height: 45px;
+  &:hover {
+    filter: brightness(140%);
+    -webkit-filter: brightness(140%);
+  }
+}
+
+.navbar-language-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
   li {
+    padding: 12px 0;
+    display: inline-block;
+    a {
+      padding: 3px 15px;
+      display: block;
+    }
+  }
+  .border-language {
+    @media (min-width: $screen-sm-min) {
+      border-right: 2px solid $divider-color;
+    }
+  }
+}
+
+// main container
+.view-container {
+  @media (max-width: $screen-xs-max) {
+    padding: 0 10px 10px 10px;
+    margin-top: 50px;
+  }
+  @media (min-width: $screen-sm-min) {
+    padding: 0 30px 30px 30px;
+    margin-top: 100px;
+  }
+  background-color: $main-container-color;
+}
+
+.view-container-padded {
+  @media (max-width: $screen-xs-max) {
+    padding: 10px;
+  }
+  @media (min-width: $screen-sm-min) {
+    padding: 30px;
+  }
+}
+
+.header-center {
+  font-size: 18px;
+  text-align: center;
+  margin: 30px 0 10px 0;
+  font-weight: normal;
+}
+
+.get-app-container {
+  padding-top: 20px;
+  margin: 0;
+  h1 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: normal;
+    @media (max-width: $screen-xs-max) {
+      font-size: 14px;
+    }
+    @media (max-width: $screen-sm-max) {
+      font-size: 16px;
+    }
+    @media (min-width: $screen-sm-min) {
+      padding-top: 20px;
+    }
+  }
+  a img.google-play {
+    max-width: 100%;
+  }
+  img.app-store {
+    max-width: 100%;
+  }
+}
+
+.location-selected {
+  @include flexbox();
+  @include align-items(center);
+  white-space: nowrap;
+  background-color: $location-header-color;
+  color: $text-color;
+  font-size: 20px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+}
+
+.general-info-container {
+  @media (max-width: $screen-xs-max) {
+    padding: 10px;
+  }
+  @media (min-width: $screen-sm-min) {
+    padding: 30px;
+  }
+}
+
+.quick-links {
+  font-weight: normal;
+  font-size: 20px;
+  margin: 0 0 5px 0;
+
+}
+
+.general-info-box {
+  border: 2px solid $divider-color;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.general-info-divider {
+  width: 100%;
+  border-top: 1px solid $divider-color-2;
+}
+
+.general-info-item {
+  .general-info-item-content {
+    display: none;
+  }
+
+  [type=radio], [type=checkbox] {
+    display: none;
+  }
+
+  [type=checkbox]:checked ~ label ~ .general-info-item-content {
     display: block;
-    border: 1px white solid;
-    background: #000;
-    color: #fff;
-    cursor: pointer;
-    margin-bottom: 5px;
-    padding: 10px 0;
-    text-align: center;
-    text-overflow: clip
+  }
+}
+
+.general-info-item-header {
+  height: 46px;
+  @include flexbox();
+  @include align-items(center);
+  @include justify-content(center);
+  color: $text-color;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  background-color: transparent;
+  border-top: 1px solid $divider-color-2;
+  border-bottom: 1px solid $divider-color-2;
+  &:hover {
+    background-color: $primary-color-5;
+  }
+  .general-info-item-header-inner {
+    @include flexbox();
+    @include justify-content(flex-start);
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+    }
+    a {
+      text-decoration: none;
+      color: $text-color;
+    }
+  }
+  i {
+    padding: 0 10px;
+    font-size: 20px;
+    width: 50px;
+  }
+
+}
+
+// styling data from API
+.line {
+  border: 0;
+  border-bottom: 1px $divider-color solid;
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px $divider-color solid;
+}
+
+.content-button {
+  height: 25px;
+  border: 1px white solid;
+  padding: 2px 2px;
+}
+
+iframe {
+  display: block
+}
+
+.g-translate {
+  float: right;
+  margin-top: 15px;
+}
+
+.lst-kix_6cj4gmv9r21z-0 > li:before, p a {
+  color: $text-color;
+}
+
+h1.page-title {
+  font-size: 36pt;
+  margin-bottom: .5em;
+  margin-top: .25em;
+
+}
+
+table.important {
+  border: 1px white dashed;
+  width: 100%;
+  border-spacing: 0;
+  margin-bottom: 1em;
+}
+
+table.important > tbody > tr:last-child > td {
+  border-bottom: 0;
+}
+
+table.toc {
+  width: 100%;
+  border-spacing: 0;
+  margin-bottom: 2em;
+
+}
+
+table.toc .image {
+  max-height: 30px;
+}
+
+table.toc td {
+  border-bottom: 1px white solid;
+  padding: 5px 5px;
+  height: 30px;
+}
+
+table.toc a {
+  text-decoration: none;
+}
+
+table.toc > tbody > tr > td:first-child {
+  width: 40px;
+}
+
+.title-icon {
+  width: 25px
+}
+
+hr.title-hr {
+  margin: 0;
+}
+
+h3.anchor {
+  margin-top: 2.5em;
+  margin-bottom: 2px;
+}
+
+a.link-button {
+  background-color: $green-accent-color;
+  color: white !important;
+  display: block;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px;
+  &:hover {
+    background-color: $green-accent-color-dark;
+  }
+}
+
+a.link-button-reversed {
+  background-color: black !important;
+  color: white !important;
+  display: block;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px;
+  &:hover {
+    background-color: #303030 !important;
+  }
+}
+
+// general info
+.general-info-item-content {
+  padding: 10px 0;
+  color: $text-color-muted;
+  border-top: 1px solid $divider-color-2;
+  border-bottom: 1px solid $divider-color-2;
+  img {
+    max-width: 100%;
   }
   a {
-    color: #fff;
-    text-decoration: none;
-  }
-  &.drop-down-list {
-    ul {
-      display: none;
-    }
-    li:hover ul {
-      display: block;
-      padding-top: 15px;
+    color: $text-color;
+    &:hover {
+      color: $text-color-muted;
     }
   }
-  &.white li {
-    background-color: #fff;
-    a {
-      color: #000;
+  h2 {
+    font-size: 24px;
+    margin: 15px 0 10px 0;
+  }
+  table {
+    border: 2px solid $divider-color;
+    margin-bottom: 10px;
+    td {
+      border: 2px solid $divider-color;
+      padding: 5px 10px;
+      p {
+        margin: 0
+      }
     }
   }
 }
 
-// accordion
+.general-info-date {
+  margin: 10px 0 -5px 0;
+  color: $text-color-muted;
+  font-size: 10px;
+  float: right;
+}
 
+.important-information-container {
+  @media (min-width: $screen-sm-min) {
+    border-top: 1px solid $divider-color-2;
+    border-bottom: 1px solid $divider-color-2;
+    @include flexbox();
+    height: 70px;
+  }
+}
+
+.important-information-item {
+  @include flex(1);
+  @include flexbox();
+  @include align-items(center);
+  @include justify-content(center);
+  @include transition-mixin(background-color, 0.2, ease-out);
+  color: $text-color-muted;
+  background-color: transparent;
+  margin: 0 !important;
+  cursor: pointer;
+  font-size: 12px;
+  &:hover {
+    background-color: $primary-color-5;
+  }
+  &:last-of-type {
+    .important-information-item-inner {
+      border-right: 0;
+    }
+  }
+}
+
+.important-information-item-inner {
+  width: 100%;
+  @include flexbox();
+  @include align-items(center);
+  @include justify-content(center);
+  @include flex-direction(row);
+  @media (max-width: $screen-xs-max) {
+    border-top: 1px solid $divider-color-2;
+    height: 50px;
+  }
+  @media (min-width: $screen-sm-min) {
+    border-right: 1px solid $divider-color-2;
+    height: 45px;
+  }
+}
+
+// location accordion
 .location-accordion {
   ul {
     list-style: none;
@@ -151,8 +532,10 @@ ul.locations {
     }
   }
   .content {
-    @include transition-mixin(all, 1.0, ease-out);
+    @include transition-mixin(transform, 0.2, ease-out);
     height: 0;
+    transform: scaleY(0);
+    transform-origin: top;
   }
 
   [type=radio], [type=checkbox] {
@@ -161,6 +544,7 @@ ul.locations {
 
   [type=checkbox]:checked ~ label ~ .content {
     height: auto;
+    transform: scaleY(1);
     .location-helper {
       display: block;
       position: absolute;
@@ -168,19 +552,6 @@ ul.locations {
         display: none;
       }
     }
-  }
-
-  .location-helper {
-    font-size: 12px;
-    display: none;
-    text-transform: uppercase;
-
-  }
-
-  .location-name {
-    text-align: center;
-    display: block;
-    width: 100%;
   }
 
   a.location {
@@ -213,5 +584,52 @@ ul.locations {
       background-color: darken($divider-color-3, 5%);
     }
   }
+}
 
+span.location-helper {
+  font-size: 12px;
+  display: none;
+  text-transform: uppercase;
+
+}
+
+span.location-name {
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+a.location-closest {
+  background-color: $green-accent-color;
+  color: #FFFFFF;
+  @include flexbox();
+  @include justify-content(flex-start);
+  @include align-items(center);
+  text-overflow: clip;
+  height: 40px;
+  padding: 0 15px;
+  font-size: 14px;
+  &:hover {
+    background-color: $green-accent-color-dark;
+  }
+  span.location-helper {
+    display: block;
+    position: absolute;
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
+}
+
+// footer
+footer {
+  padding: 50px 0 20px 0;
+  text-align: center;
+  color: $text-color-muted;
+  a {
+    color: $text-color;
+    &:hover {
+      color: $text-color-muted;
+    }
+  }
 }

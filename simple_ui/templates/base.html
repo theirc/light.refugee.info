@@ -13,8 +13,18 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="description" content="Important information for refugees."/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/favicons/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{% static 'images/favicons/favicon-16x16.png' %}" sizes="16x16">
+    <link rel="manifest" href="{% static 'images/favicons/manifest.json' %}">
+    <link rel="mask-icon" href="{% static 'images/favicons/safari-pinned-tab.svg' %}" color="#FFFFFF">
+    <link rel="shortcut icon" href="{% static 'images/favicons/favicon.ico' %}">
+    <meta name="msapplication-config" content="{% static 'images/favicons/browserconfig.xml' %}">
+    <meta name="theme-color" content="#FFFFFF">
 
     {% compress css %}
         <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/main.scss' %}">
@@ -28,10 +38,12 @@
     <title>{% block title %}RefugeeInfo{% endblock title %}</title>
 </head>
 <body>
-    {% block body %}
-        {% include 'navigation.html' %}
-            {% block content %}{% endblock content %}
-        {% include 'footer.html' %}
-    {% endblock body %}
+{% block body %}
+    {% include 'navigation.html' %}
+    <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 view-container view-container-padded">
+        {% block content %}{% endblock content %}
+    </div>
+    {% include 'footer.html' %}
+{% endblock body %}
 </body>
 </html>

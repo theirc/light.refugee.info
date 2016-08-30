@@ -5,23 +5,40 @@
 {% get_available_languages as LANGUAGES %}
 {% get_language_info_list for LANGUAGES as languages %}
 
-<div class="logo-bar-container">
-    <div style="width: 100%; text-align: center">
-        <a href="/">
-            <img src="{% static "images/wordmark.png" %}"/>
-        </a>
+<div class="navbar" role="navigation">
+    <div class="logo-container">
+        <a href="/"><img src="{% static 'images/logo-light.png' %}" class="refugee-logo"/></a>
     </div>
-    <hr/>
-    <div class="language-wrapper language-en">
-        <ul class="languages detailed-languages">
-            {% for language in languages %}
-                <li>
-                    <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}" lang="{{ language.code }}">
-                        {{ language.name_local }}
+
+    <div class="container">
+        <div class="navbar-inner">
+            <div class="navbar-left">
+                <div class="logo-bar-container">
+                    <img class="logo-bar" src="{% static 'images/logo-bar-light.png' %}"/>
+                </div>
+                <div style="padding-top: 3px">
+                    <a href="#" class="about-us">
+                        {% trans 'About us' %}
                     </a>
-                </li>
-            {% endfor %}
-        </ul>
+                    <a href="#" class="give-feedback">
+                        {% trans "Give feedback" %}
+                    </a>
+                </div>
+            </div>
+
+
+            <ul class="navbar-language-list">
+                {% for language in languages %}
+                    <li>
+                        <a class="{% if not forloop.last %}border-language{% endif %}"
+                           href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+                           lang="{{ language.code }}">
+                            {{ language.name_local }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-    <hr/>
 </div>
+

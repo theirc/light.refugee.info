@@ -3,21 +3,34 @@
 {% load i18n %}
 {% load tz %}
 {% block content %}
+    <div class="row get-app-container">
+        <div class="col-xs-12 col-sm-4">
+            <h1>{% trans "Available on Play store for Android and App store for iOS." %}</h1>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <img class="app-store" src="{% static 'images/app-store.png' %}">
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <a href='https://play.google.com/store/apps/details?id=info.refugee.app&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+                <img class="google-play" alt='Get it on Google Play'
+                     src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
+            </a>
+        </div>
+    </div>
+
     {% if closest %}
-        <h3>{% trans "Closest location:" %}</h3>
-        <ul class="locations white">
-            <li>
-                <a href="/{{ closest.slug }}/">
-                    {% trans "View info for" %}: <br/>
-                    {% firstof closest.title closest.metadata.page_title closest.name %}
-                    {% if closest.distance %}
-                        <span style="direction: ltr">({{ closest.distance|floatformat }} km)</span>
-                    {% endif %}
-                </a>
-            </li>
-        </ul>
+        <h3 class="header-center">{% trans "Closest location" %}</h3>
+        <a class="location location-region location-closest" href="/{{ closest.slug }}/">
+            <span class="location-helper">{% trans "View info for" %}</span>
+            <span class="location-name">
+                {% firstof closest.title closest.metadata.page_title closest.name %}
+                {% if closest.distance %}
+                    <span style="direction: ltr">({{ closest.distance|floatformat }} km)</span>
+                {% endif %}
+                </span>
+        </a>
     {% endif %}
-    <h3>{% trans "Other locations available:" %}</h3>
+    <h3 class="header-center">{% trans "Where are you?" %}</h3>
     {% for r in regions %}
         {% if r.children or not r.hidden %}
             <div class="location-accordion">
@@ -27,23 +40,26 @@
                         <label for="checkbox-{{ r.id }}">{% firstof r.title  r.metadata.page_title r.name %}</label>
                         <div class="content">
                             {% if not r.hidden %}
-                                <a class="location location-country" href="/{{ r.slug }}/?language={{ LANGUAGE_CODE }}/">
+                                <a class="location location-country"
+                                   href="/{{ r.slug }}/?language={{ LANGUAGE_CODE }}/">
                                     <span class="location-helper">{% trans "View info for" %}</span>
                                     <span class="location-name">{% firstof r.title r.metadata.page_title r.name %}</span>
                                 </a>
                             {% endif %}
                             {% if r.children %}
                                 {% for c in r.children %}
-                                    {% if c.level == 2  %}
-                                        <a class="location location-region" href="/{{ c.slug }}/?language={{ LANGUAGE_CODE }}/">
+                                    {% if c.level == 2 %}
+                                        <a class="location location-region"
+                                           href="/{{ c.slug }}/?language={{ LANGUAGE_CODE }}/">
                                             <span class="location-helper">{% trans "View info for" %}</span>
                                             <span class="location-name">{% firstof c.title c.metadata.page_title c.name %}</span>
                                         </a>
                                     {% endif %}
                                 {% endfor %}
                                 {% for c in r.children %}
-                                    {% if c.level == 3  %}
-                                        <a class="location location-camp" href="/{{ c.slug }}/?language={{ LANGUAGE_CODE }}/">
+                                    {% if c.level == 3 %}
+                                        <a class="location location-camp"
+                                           href="/{{ c.slug }}/?language={{ LANGUAGE_CODE }}/">
                                             <span class="location-helper">{% trans "View info for" %}</span>
                                             <span class="location-name">{% firstof c.title c.metadata.page_title c.name %}</span>
                                         </a>
@@ -57,10 +73,4 @@
 
         {% endif %}
     {% endfor %}
-    <hr/>
-    <img src="/imaging/logo-bar/" alt="IRC | MercyCorps"/>
-    <hr/>
-    <ul class="locations">
-        <li><a href="/acknowledgements/">{% trans "Acknowledgements" %}</a></li>
-    </ul>
 {% endblock content %}
