@@ -31,13 +31,36 @@
                 {% for language in languages %}
                     <li>
                         <a class="{% if not forloop.last %}border-language{% endif %}"
-                           href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
-                           lang="{{ language.code }}">
+                           href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}" lang="{{ language.code }}">
                             {{ language.name_local }}
                         </a>
                     </li>
                 {% endfor %}
             </ul>
+        </div>
+    </div>
+
+    <div class="navbar-button-container">
+        <input type="checkbox" id="checkbox-navbar" name="checkbox-navbar"/>
+        <label class="navbar-button" for="checkbox-navbar"><i class="fa fa-bars"></i></label>
+        <div class="navbar-menu">
+            <p class="section-header">{% trans "Actions" %}</p>
+            <a href="/">
+                {% trans "Change location" %}
+            </a>
+            <a href="/">
+                {% trans 'About us' %}
+            </a>
+            <a href="/">
+                {% trans "Give feedback" %}
+            </a>
+            <p class="section-header">{% trans "Change language" %}</p>
+            {% for language in languages %}
+                <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+                   lang="{{ language.code }}">
+                    {{ language.name_local }}
+                </a>
+            {% endfor %}
         </div>
     </div>
 </div>
