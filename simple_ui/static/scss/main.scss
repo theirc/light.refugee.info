@@ -337,12 +337,15 @@ p {
   @media (min-width: $screen-sm-min) {
     padding: 30px;
   }
+  img {
+    max-width: 100%;
+  }
 }
 
 .quick-links {
   font-weight: normal;
   font-size: 20px;
-  margin: 0 0 5px 0;
+  margin: 20px 0 5px 0;
 
 }
 
@@ -591,6 +594,9 @@ a.link-button-reversed {
     .important-information-item-inner {
       border-right: 0;
     }
+  }
+  &.active {
+    background-color: $primary-color-5;
   }
 }
 

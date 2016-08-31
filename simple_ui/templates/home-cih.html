@@ -45,7 +45,7 @@
                         <div class="content">
                             {% if not r.hidden %}
                                 <a class="location location-country"
-                                   href="/{{ r.slug }}/">
+                                   href="{% url 'simple_ui:home' r.slug %}">
                                     <span class="location-helper">{% trans "View info for" %}</span>
                                     <span class="location-name">{% firstof r.title r.metadata.page_title r.name %}</span>
                                 </a>
@@ -54,7 +54,7 @@
                                 {% for c in r.children %}
                                     {% if c.level == 2 %}
                                         <a class="location location-region"
-                                           href="/{{ c.slug }}/">
+                                           href="{% url 'simple_ui:home' c.slug %}">
                                             <span class="location-helper">{% trans "View info for" %}</span>
                                             <span class="location-name">{% firstof c.title c.metadata.page_title c.name %}</span>
                                         </a>
@@ -63,7 +63,7 @@
                                 {% for c in r.children %}
                                     {% if c.level == 3 %}
                                         <a class="location location-camp"
-                                           href="/{{ c.slug }}/">
+                                           href="{% url 'simple_ui:home' c.slug %}">
                                             <span class="location-helper">{% trans "View info for" %}</span>
                                             <span class="location-name">{% firstof c.title c.metadata.page_title c.name %}</span>
                                         </a>
