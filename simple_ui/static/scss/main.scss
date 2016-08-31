@@ -116,6 +116,7 @@ p {
   @media (max-width: $screen-xs-max) {
     display: none;
   }
+  direction: ltr;
 }
 
 .navbar-left {
@@ -130,6 +131,7 @@ p {
   @include justify-content(center);
   position: absolute;
   width: 100%;
+  direction: ltr;
   @media (max-width: $screen-xs-max) {
     display: block;
   }
@@ -198,6 +200,7 @@ p {
     height: 100%;
     cursor: pointer;
     font-size: 20px;
+    text-align: center;
   }
   .navbar-menu {
     @include transition-mixin(transform, 0.2, ease-out);
@@ -724,6 +727,7 @@ span.location-name {
 }
 
 span.location-label-name {
+  white-space: nowrap;
   @media (max-width: $screen-xs-max) {
     text-align: center;
     display: block;
