@@ -15,22 +15,6 @@
             </div>
         {% endfor %}
 
-        {% if not has_important %}
-            <h1 class="quick-links">{% trans "Important information:" %}</h1>
-            <div class="important-information-container">
-                {% for p in location.content %}
-                    {% if p.important %}
-                        <a class="important-information-item"
-                           href="#{% if p.anchor_name %}{{ p.anchor_name }}{% else %}Anchor_{{ p.index }}{% endif %}">
-                            <div class="important-information-item-inner">
-                                {{ p.title }}
-                            </div>
-                        </a>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endif %}
-
         {% for p in location.content %}
             {% if p.important %}
                 <div class="general-info-item">
