@@ -19,6 +19,8 @@ from . import views
 
 urlpatterns = [
     url(r'acknowledgements/$', views.acknowledgements, ),
+    url(r'about/$', views.about, ),
+
     url(r'^(?P<slug>[a-zA-Z\-0-9]+)/?$', views.content, ),
     url(r'$', views.home, ),
 ]

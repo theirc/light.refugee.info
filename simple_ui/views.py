@@ -213,6 +213,23 @@ def acknowledgements(request):
     return response
 
 
+@cache_page(CACHE_LENGTH * 4)
+def about(request):
+    user_language = find_language(request)
+
+    activate(user_language)
+
+    response = render(
+        request,
+        "content/about.html",
+        {
+        },
+        RequestContext(request)
+    )
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+    return response
+
+
 def find_language(request, language=None):
     if language:
         user_language = language[0:2]
