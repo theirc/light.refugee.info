@@ -373,7 +373,7 @@ p {
   height: 46px;
   @include flexbox();
   @include align-items(center);
-  @include justify-content(center);
+  @include justify-content(flex-start);
   color: $text-color;
   width: 100%;
   text-align: center;
@@ -384,23 +384,28 @@ p {
   &:hover {
     background-color: $primary-color-5;
   }
-  .general-info-item-header-inner {
-    @include flexbox();
-    @include justify-content(flex-start);
-    @media (max-width: $screen-xs-max) {
-      width: 100%;
-    }
-    a {
-      text-decoration: none;
-      color: $text-color;
-    }
+  @media (max-width: $screen-xs-max) {
+    text-align: start;
   }
+  a {
+    text-decoration: none;
+    color: $text-color;
+  }
+
   i {
     padding: 0 10px;
     font-size: 20px;
     width: 50px;
+    color: $green-accent-color-dark;
   }
-
+  .direction-filler {
+    display: block;
+    width: 33%;
+    height: 100%;
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
 }
 
 // styling data from API
@@ -613,9 +618,26 @@ a.link-button-reversed {
     padding: 0;
     margin: 0;
   }
+  .location-flag {
+    height: 24px;
+    width: 54px;
+    padding: 0 15px;
+    @media (max-width: $screen-xs-max) {
+      position: absolute;
+      top: 8px;
+    }
+  }
+  .direction-filler {
+    display: block;
+    width: 40%;
+    height: 100%;
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
   label {
     @include flexbox();
-    @include justify-content(center);
+    @include justify-content(flex-start);
     @include align-items(center);
     background-color: $country-button-color;
     border-top: 1px solid $divider-color;
@@ -625,6 +647,7 @@ a.link-button-reversed {
     height: 40px;
     cursor: pointer;
     font-size: 14px;
+    position: relative;
     &:hover {
       background-color: darken($country-button-color, 5%);
     }
@@ -698,6 +721,14 @@ span.location-name {
   text-align: center;
   display: block;
   width: 100%;
+}
+
+span.location-label-name {
+  @media (max-width: $screen-xs-max) {
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
 }
 
 a.location-closest {
