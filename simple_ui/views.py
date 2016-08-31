@@ -85,7 +85,7 @@ def home(request):
     return response
 
 
-def content(request, slug, language=None):
+def content(request, slug, language=None, info_slug=None):
     """
     Main view of the system. All it does is try to figure out which language is more appropriate and passes it over to
     the api.
@@ -93,6 +93,7 @@ def content(request, slug, language=None):
     :param request:
     :param slug:
     :param language:
+    :param info_slug;
     :return:
     """
     user_language = find_language(request, language=language)
@@ -186,27 +187,15 @@ def content(request, slug, language=None):
         }
     )
 
+    if info_slug:
+        context.update({
+            'important_info': next((info for info in region['important_information'] if info['slug'] == info_slug), None)
+        })
+
     response = render(
         request,
         "content/index-cih.html",
         context,
-        RequestContext(request)
-    )
-    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
-    return response
-
-
-@cache_page(CACHE_LENGTH * 4)
-def acknowledgements(request):
-    user_language = find_language(request)
-
-    activate(user_language)
-
-    response = render(
-        request,
-        "acknowledgements-cih.html",
-        {
-        },
         RequestContext(request)
     )
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)

@@ -24,7 +24,7 @@ urlpatterns = [
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += solid_i18n_patterns(
-                    url(r'^', include('simple_ui.urls'))
-                )
+    url(r'^', include('simple_ui.urls', namespace='simple_ui'))
+)
 
 handler404 = 'root.views.redirect_to_home'

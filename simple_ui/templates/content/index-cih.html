@@ -7,10 +7,31 @@
     <div class="row location-selected">
         {% firstof location.title location.metadata.page_title location.name %}
     </div>
+
+    <h1 class="quick-links">{% trans "Important information:" %}</h1>
+    <div class="important-information-container">
+        {% for info in location.important_information %}
+            {% if not info.hidden %}
+                <a href="{% url 'simple_ui:important-info' slug=location.slug info_slug=info.slug %}"
+                   class="important-information-item {% if info.slug == important_info.slug %}active{% endif %}">
+                    <div class="important-information-item-inner">
+                    {{ info.metadata.page_title }}
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="general-info-container">
+        {% for i in important_info.content %}
+            {{ i.section | safe }}
+        {% endfor %}
+    </div>
+
     <div class="general-info-container">
 
         {% for b in location.metadata.banners %}
-            <div class="general-info-box" ng-repeat="b in ctrl.location.metadata.banners">
+            <div class="general-info-box">
                 {{ b|safe }}
             </div>
         {% endfor %}
