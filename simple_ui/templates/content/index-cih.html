@@ -35,7 +35,11 @@
             {% if p.important %}
                 <div class="general-info-item">
                     <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"/>
-                    <label class="general-info-item-header" for="checkbox-{{ p.index }}">{{ p.title }}</label>
+                    <label class="general-info-item-header" for="checkbox-{{ p.index }}">
+                        <span class="direction-filler"></span>
+                        <i class="fa {{ p.vector_icon }}"></i>
+                        <span>{{ p.title }}</span>
+                    </label>
                     <div class="general-info-item-content">{{ p.section|safe }}</div>
                 </div>
             {% endif %}
@@ -45,7 +49,11 @@
             {% if not p.important %}
                 <div class="general-info-item">
                     <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"/>
-                    <label class="general-info-item-header" for="checkbox-{{ p.index }}">{{ p.title }}</label>
+                    <label class="general-info-item-header" for="checkbox-{{ p.index }}">
+                        <span class="direction-filler"></span>
+                        <i class="fa {{ p.vector_icon }}"></i>
+                        <span>{{ p.title }}</span>
+                    </label>
                     <div class="general-info-item-content">{{ p.section|safe }}</div>
                 </div>
             {% endif %}
