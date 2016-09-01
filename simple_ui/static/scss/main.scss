@@ -329,6 +329,28 @@ p {
   padding: 10px 15px;
   margin: 0 0 15px 0;
 }
+.version-notification {
+  @include flexbox();
+  @include align-items(center);
+  @include justify-content(center);
+  @include flex-direction(row);
+  background-color: $location-header-color;
+  padding: 15px;
+  margin: 10px 0 0;
+  text-align: center;
+  p {
+    margin: 0;
+  }
+  i.fa {
+    font-size: 22px;
+    color: $green-accent-color;
+    padding: 0 15px;
+  }
+  @media (max-width: $screen-xs-max) {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
 
 .general-info-container {
   @media (max-width: $screen-xs-max) {
