@@ -804,6 +804,11 @@ a.location-closest {
     color: $text-color-muted;
     text-decoration: underline;
   }
+  .divider{
+    border-bottom: 1px $divider-color solid;
+    margin-bottom:15px;
+    margin-top:15px;
+  }
 }
 
 // footer
@@ -817,4 +822,8 @@ footer {
       color: $text-color-muted;
     }
   }
+}
+
+.align-center{
+  text-align: center;
 }
