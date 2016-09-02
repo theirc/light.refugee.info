@@ -7,10 +7,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.template import RequestContext
 from django.utils.translation import activate
-from django.views.decorators.cache import cache_page
 from dateutil import parser
-
-CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH', 15) * 60
 
 
 def home(request):
@@ -202,7 +199,6 @@ def content(request, slug, language=None, info_slug=None):
     return response
 
 
-@cache_page(CACHE_LENGTH * 4)
 def about(request):
     user_language = find_language(request)
 
