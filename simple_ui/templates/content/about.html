@@ -5,76 +5,114 @@
 {% load l10n %}
 {% block content %}
     <div class="about-container">
-        <h1><img class="invert" src="{% static "images/Google-Logo.png" %}" style="height: 50px"/></h1>
-        <p>
-            {% trans "RefugeeInfo.eu was made with our friends from Google and is based on the" %}
-            <a href="https://github.com/google/crisis-info-hub" target="_blank">{% trans "Crisis Info Hub" %}</a>
-            {% trans "open source project" %}.
-            <br/>
-            <br/>
-            {% trans "More information about Google's support to NGOs and other charitable organizations can be found on their website: " %}
-            <a href="http://google.org/" target="_blank">google.org</a>.
-        </p>
-        <h1><img src="{% static "images/IRC-logo.png" %}" style="width: 125px"/></h1>
-        <p>
-            <b>{% trans "The International Rescue Committee" %}</b>
-            {% trans "responds to the world’s worst humanitarian crises, helping to restore health, safety, education, economic wellbeing, and power to people devastated by conflict and disaster." %}
-            <br/>
-            <br/>
-            {% trans "More information about the International Rescue Committee can be found at their website " %}
-            <a href="http://rescue.org" target="_blank">rescue.org</a>.
-        </p>
-        <h1><img class="invert" src="{% static "images/MC-logo.png" %}" style="height: 50px"/></h1>
-
-        <p>
-            <b>{% trans "Mercy Corps'" %}</b>
-            {% trans "mission is to alleviate suffering, poverty and oppression by helping people build secure, productive and just communities." %}
-            <br/>
-            <br/>
-            {% trans "More information about Mercy Corps can be found on their website:" %}
-            <a href="http://mercycorps.org" target="_blank">mercycorps.org</a>.
-        </p>
-
-        <h1>
-            <img src="{% static "images/SCI-logo.jpg" %}" style="height: 50px"/></h1>
-
-        <p>
-            <b>{% trans "Save the Children" %}</b>
-            {% trans "is the world's leading independent organisation for children. We work in around 120 countries. We save children's lives; we fight for their rights; we help them fulfil their potential." %}
-            <br/>
-            <br/>
-            {% trans "More information about Save the Children can be found on their website:" %}
-            <a href="https://www.savethechildren.net/">savethechildren.net</a>
-        </p>
-        <h1><img style="background-color: black" src="{% static "images/TWB-logo.png" %}"/></h1>
-
-        <p>
-            {% trans "Originally founded in 1993 in France as" %}
-            <b>{% trans "Traducteurs sans Frontières" %}</b>
-            {% trans "by Lori Thicke and Ros Smith-Thomas to linkthe world’s translators to vetted NGOs that focus on health, nutrition and education, " %}
-            <b>{% trans "Translators without Borders (TWB)" %}</b>
-            {% trans "is a U. S. non-profit organization that aims to close the language gaps that hinder critical humanitarian efforts worldwide." %}
-            {% trans "We recognize that the effectiveness of any aid program depends on delivering information in the language of the affected population." %}
-            {% trans " By maintaining a global network of professional translators, we help non-profits organizations overcome communication barriers, increasing access to critical information and services while fostering a climate of understanding, respect and dignity in times of greatneed." %}
-            <br/>
-            <br/>
-            {% trans "More information about Translators Without Borders can be found on their website:" %}
-            <a href="http://translatorswithoutborders.org/">translatorswithoutborders.org</a>
-        </p>
-        <h1><img src="{% static "images/SOSCV-logo.png" %}" style="height: 100px"/></h1>
-        <p>
-            <b>{% trans "Fondacija SOS Decija sela Srbija" %}</b>
-            {% trans "is a non-profit, non-governmental organization established to provide specialized care and support for children without parents and parental care," %}
-            {% trans "and for families in need, through the establishment and management of programs that provide care and support for children and families, " %}promoting and advocating children's rights
-            {% trans "in compliance with the UN Convention on the Rights of the Child, raising awareness and building capacity of the community to provide adequate support and services to children and families," %}
-            {% trans "and development of cooperation with governmental and non-governmental sectors to provide assistance and support to children and families." %}
-            <br/>
-            <br/>
-            {% trans "More information about SOS Children's Villages Serbia can be found on their website:" %}
-            <a target="_blank" href="http://sos-decijasela.rs/">sos-decijasela.rs</a>.
-            {% trans "For more information about SOS Children's Villages programming around the globe, visit" %}
-            <a href="http://www.sos-childrensvillages.org/" target="_blank">sos-childrensvillages.org</a>
-        </p>
+        <div class="row">
+             <div class="col-xs-12 col-sm-4 align-center">
+                 <h1><img class="invert" src="{% static "images/Google-Logo.png" %}" style="height: 50px"/></h1>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <p>
+                    {% trans "RefugeeInfo.eu was made with our friends from Google and is based on the" %}
+                    <a href="https://github.com/google/crisis-info-hub" target="_blank">{% trans "Crisis Info Hub" %}</a>
+                    {% trans "open source project" %}.
+                    <br/>
+                    <br/>
+                    {% trans "More information about Google's support to NGOs and other charitable organizations can be found on their website: " %}
+                    <a href="http://google.org/" target="_blank">google.org</a>.
+                </p>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+             <div class="col-xs-12 col-sm-4 align-center">
+                <h1><img src="{% static "images/IRC-logo.png" %}" style="width: 125px"/></h1>
+             </div>
+            <div class="col-xs-12 col-sm-8">
+                <p>
+                    <b>{% trans "The International Rescue Committee" %}</b>
+                    {% trans "responds to the world’s worst humanitarian crises, helping to restore health, safety, education, economic wellbeing, and power to people devastated by conflict and disaster." %}
+                    <br/>
+                    <br/>
+                    {% trans "More information about the International Rescue Committee can be found at their website " %}
+                    <a href="http://rescue.org" target="_blank">rescue.org</a>.
+                </p>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 align-center" >
+                <h1><img class="invert" src="{% static "images/MC-logo.png" %}" style="height: 50px"/></h1>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <p>
+                    <b>{% trans "Mercy Corps'" %}</b>
+                    {% trans "mission is to alleviate suffering, poverty and oppression by helping people build secure, productive and just communities." %}
+                    <br/>
+                    <br/>
+                    {% trans "More information about Mercy Corps can be found on their website:" %}
+                    <a href="http://mercycorps.org" target="_blank">mercycorps.org</a>.
+                </p>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 align-center">
+                <h1>
+                <img src="{% static "images/SCI-logo.jpg" %}" style="height: 50px"/></h1>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <p>
+                    <b>{% trans "Save the Children" %}</b>
+                    {% trans "is the world's leading independent organisation for children. We work in around 120 countries. We save children's lives; we fight for their rights; we help them fulfil their potential." %}
+                    <br/>
+                    <br/>
+                    {% trans "More information about Save the Children can be found on their website:" %}
+                    <a href="https://www.savethechildren.net/">savethechildren.net</a>
+                </p>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 align-center">
+                <h1><img style="background-color: black" src="{% static "images/TWB-logo.png" %}"/></h1>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <p>
+                    {% trans "Originally founded in 1993 in France as" %}
+                    <b>{% trans "Traducteurs sans Frontières" %}</b>
+                    {% trans "by Lori Thicke and Ros Smith-Thomas to linkthe world’s translators to vetted NGOs that focus on health, nutrition and education, " %}
+                    <b>{% trans "Translators without Borders (TWB)" %}</b>
+                    {% trans "is a U. S. non-profit organization that aims to close the language gaps that hinder critical humanitarian efforts worldwide." %}
+                    {% trans "We recognize that the effectiveness of any aid program depends on delivering information in the language of the affected population." %}
+                    {% trans " By maintaining a global network of professional translators, we help non-profits organizations overcome communication barriers, increasing access to critical information and services while fostering a climate of understanding, respect and dignity in times of greatneed." %}
+                    <br/>
+                    <br/>
+                    {% trans "More information about Translators Without Borders can be found on their website:" %}
+                    <a href="http://translatorswithoutborders.org/">translatorswithoutborders.org</a>
+                </p>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 align-center">
+                <h1><img src="{% static "images/SOSCV-logo.png" %}" style="height: 100px"/></h1>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <p>
+                    <b>{% trans "Fondacija SOS Decija sela Srbija" %}</b>
+                    {% trans "is a non-profit, non-governmental organization established to provide specialized care and support for children without parents and parental care," %}
+                    {% trans "and for families in need, through the establishment and management of programs that provide care and support for children and families, promoting and advocating children's rights" %}
+                    {% trans "in compliance with the UN Convention on the Rights of the Child, raising awareness and building capacity of the community to provide adequate support and services to children and families," %}
+                    {% trans "and development of cooperation with governmental and non-governmental sectors to provide assistance and support to children and families." %}
+                    <br/>
+                    <br/>
+                    {% trans "More information about SOS Children's Villages Serbia can be found on their website:" %}
+                    <a target="_blank" href="http://sos-decijasela.rs/">sos-decijasela.rs</a>.
+                    {% trans "For more information about SOS Children's Villages programming around the globe, visit" %}
+                    <a href="http://www.sos-childrensvillages.org/" target="_blank">sos-childrensvillages.org</a>
+                </p>
+            </div>
+        </div>
+        <div class="divider"></div>
         <h1>{% trans "Disaster Tech Lab" %}</h1>
 
         <p><b>{% trans "Disaster Tech Lab" %}</b>
