@@ -329,6 +329,7 @@ p {
   padding: 10px 15px;
   margin: 0 0 15px 0;
 }
+
 .version-notification {
   @include flexbox();
   @include align-items(center);
@@ -353,6 +354,10 @@ p {
 }
 
 .general-info-container {
+  margin: 10px 0;
+  border-top: 1px solid $divider-color-2;
+  border-bottom: 1px solid $divider-color-2;
+
   @media (max-width: $screen-xs-max) {
     padding: 10px;
   }
@@ -361,6 +366,9 @@ p {
   }
   img {
     max-width: 100%;
+  }
+  &:empty {
+    display: none;
   }
 }
 
@@ -636,6 +644,18 @@ a.link-button-reversed {
     border-right: 1px solid $divider-color-2;
     height: 45px;
   }
+}
+
+.green-bar {
+  margin: 0;
+  background-color: $green-accent-color;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 18px;
+  padding: 6px 0;
+  color: #f8fefc;
+  margin-bottom: 0 !important;
 }
 
 // location accordion
