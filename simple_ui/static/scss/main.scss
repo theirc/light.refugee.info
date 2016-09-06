@@ -319,7 +319,7 @@ p {
   }
 }
 
-.location-selected {
+.title-bar {
   @include flexbox();
   @include align-items(center);
   white-space: nowrap;
