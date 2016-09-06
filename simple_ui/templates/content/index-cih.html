@@ -4,7 +4,7 @@
 {% load tz %}
 {% load l10n %}
 {% block content %}
-    <div class="row location-selected">
+    <div class="row title-bar">
         {% firstof location.title location.metadata.page_title location.name %}
     </div>
 
