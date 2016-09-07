@@ -21,9 +21,7 @@
             {% endif %}
         {% endfor %}
     </div>
-    <div class="row green-bar" style="margin-top: 10px">
-        {{ important_info.metadata.page_title }}
-    </div>
+    <div class="row green-bar" style="margin-top: 10px">{{ important_info.metadata.page_title }}</div>
     <div class="general-info-container">{% for i in important_info.content %}{{ i.section | safe }}{% endfor %}</div>
 
     <div class="general-info-container">

@@ -255,8 +255,6 @@ p {
     transform: scaleY(1);
     .location-helper {
       display: block;
-      position: absolute;
-      top: 0;
       @media (max-width: $screen-xs-max) {
         display: none;
       }
@@ -370,6 +368,12 @@ p {
   &:empty {
     display: none;
   }
+  a {
+    text-decoration: underline;
+    &:hover {
+      color: $text-color-muted;
+    }
+  }
 }
 
 .quick-links {
@@ -438,7 +442,7 @@ p {
   }
   .direction-filler {
     display: block;
-    width: 33%;
+    width: 35%;
     height: 100%;
     @media (max-width: $screen-xs-max) {
       display: none;
@@ -533,6 +537,7 @@ h3.anchor {
 }
 
 a.link-button {
+  @include transition-mixin(background-color, 0.15, linear);
   background-color: $green-accent-color;
   color: white !important;
   display: block;
@@ -540,21 +545,25 @@ a.link-button {
   text-align: center;
   text-decoration: none;
   padding: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
   &:hover {
     background-color: $green-accent-color-dark;
   }
 }
 
 a.link-button-reversed {
-  background-color: black !important;
-  color: white !important;
+  @include transition-mixin(background-color, 0.15, linear);
+  background-color: #FFFFFF;
+  color: $text-color;
   display: block;
   font-size: 14px;
   text-align: center;
   text-decoration: none;
   padding: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
+
   &:hover {
-    background-color: #303030 !important;
+    background-color: #e2e2e2;
   }
 }
 
@@ -655,7 +664,9 @@ a.link-button-reversed {
   font-size: 18px;
   padding: 6px 0;
   color: #f8fefc;
-  margin-bottom: 0 !important;
+  &:empty {
+    display: none;
+  }
 }
 
 // location accordion
@@ -671,7 +682,7 @@ a.link-button-reversed {
     padding: 0;
     margin: 0;
   }
-  .location-flag {
+  .location-flag, .location-icon {
     height: 24px;
     width: 54px;
     padding: 0 15px;
@@ -697,13 +708,16 @@ a.link-button-reversed {
     border-top: 1px solid $divider-color;
     color: $text-color;
     text-decoration: none;
-    padding: 0;
+    padding: 0 15px;
     height: 40px;
     cursor: pointer;
     font-size: 14px;
     position: relative;
     &:hover {
       background-color: darken($country-button-color, 5%);
+    }
+    @media (max-width: $screen-xs-max) {
+      padding: 0;
     }
   }
   .content {
@@ -721,9 +735,8 @@ a.link-button-reversed {
     height: auto;
     transform: scaleY(1);
     .location-helper {
+      width: 40%;
       display: block;
-      position: absolute;
-      top: 0;
       @media (max-width: $screen-xs-max) {
         display: none;
       }
@@ -740,6 +753,9 @@ a.link-button-reversed {
     padding: 0 15px;
     font-size: 14px;
     position: relative;
+    @media (max-width: $screen-xs-max) {
+      padding: 0;
+    }
   }
 
   a.location-country {
@@ -773,9 +789,9 @@ span.location-helper {
 }
 
 span.location-name {
-  text-align: center;
-  display: block;
-  width: 100%;
+  //text-align: center;
+  //display: block;
+  //width: 100%;
 }
 
 span.location-label-name {
@@ -804,8 +820,6 @@ a.location-closest {
   }
   span.location-helper {
     display: block;
-    position: absolute;
-    top: 0;
     @media (max-width: $screen-xs-max) {
       display: none;
     }
