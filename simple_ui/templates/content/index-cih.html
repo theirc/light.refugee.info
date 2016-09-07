@@ -50,7 +50,7 @@
 
         {% for p in location.content %}
             {% if not p.important %}
-                <div class="general-info-item">
+                <div class="general-info-item {% if p.hide_from_toc and p.anchor_name %} hide-from-toc" id="{{ p.anchor_name }}{% endif %}">
                     <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"/>
                     <label class="general-info-item-header" for="checkbox-{{ p.index }}">
                         <span class="direction-filler"></span>

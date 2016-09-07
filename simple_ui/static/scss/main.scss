@@ -404,6 +404,16 @@ p {
   [type=checkbox]:checked ~ label ~ .general-info-item-content {
     display: block;
   }
+
+  &.hide-from-toc {
+    display: none;
+    &:target {
+      .general-info-item-header{
+          background-color: $location-header-color;
+      }
+      display: block;
+    }
+  }
 }
 
 .general-info-item-header {
