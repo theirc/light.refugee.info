@@ -564,7 +564,7 @@ a.link-button {
 a.link-button-reversed {
   @include transition-mixin(background-color, 0.15, linear);
   background-color: #FFFFFF;
-  color: $text-color;
+  color: $text-color !important;
   display: block;
   font-size: 14px;
   text-align: center;
