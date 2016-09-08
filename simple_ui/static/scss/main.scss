@@ -789,9 +789,10 @@ span.location-helper {
 }
 
 span.location-name {
-  //text-align: center;
-  //display: block;
-  //width: 100%;
+  text-align: center;
+  display: block;
+  width: 100%;
+  position: absolute;
 }
 
 span.location-label-name {
