@@ -27,7 +27,7 @@
 
     {% if closest %}
         <h3 class="header-center">{% trans "Closest location" %}</h3>
-        <a class="location location-region location-closest" href="/{{ closest.slug }}/">
+        <a class="location location-region location-closest" href="{% url 'simple_ui:home' closest.slug %}">
             <span class="location-helper">{% trans "View info for" %}</span>
             <span class="location-name">
                 {% firstof closest.title closest.metadata.page_title closest.name %}
@@ -54,7 +54,8 @@
                                 <a class="location location-country"
                                    href="{% url 'simple_ui:home' r.slug %}">
                                     <span class="location-helper">{% trans "View info for" %}</span>
-                                    <span class="location-name">{% firstof r.title r.metadata.page_title r.name %}</span>
+                                    <img class="location-icon" src="{% static 'images/level-country.png' %}"/>
+                                    <span class="location-label-name">{% firstof r.title r.metadata.page_title r.name %}</span>
                                 </a>
                             {% endif %}
                             {% if r.children %}
@@ -63,7 +64,8 @@
                                         <a class="location location-region"
                                            href="{% url 'simple_ui:home' c.slug %}">
                                             <span class="location-helper">{% trans "View info for" %}</span>
-                                            <span class="location-name">{% firstof c.title c.metadata.page_title c.name %}</span>
+                                            <img class="location-icon" src="{% static 'images/level-region.png' %}"/>
+                                            <span class="location-label-name">{% firstof c.title c.metadata.page_title c.name %}</span>
                                         </a>
                                     {% endif %}
                                 {% endfor %}
@@ -72,7 +74,8 @@
                                         <a class="location location-camp"
                                            href="{% url 'simple_ui:home' c.slug %}">
                                             <span class="location-helper">{% trans "View info for" %}</span>
-                                            <span class="location-name">{% firstof c.title c.metadata.page_title c.name %}</span>
+                                            <img class="location-icon" src="{% static 'images/level-camp.png' %}"/>
+                                            <span class="location-label-name">{% firstof c.title c.metadata.page_title c.name %}</span>
                                         </a>
                                     {% endif %}
                                 {% endfor %}
