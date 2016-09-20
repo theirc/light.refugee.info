@@ -5,7 +5,12 @@
 {% load l10n %}
 {% block content %}
     <div class="row title-bar">
-        {% firstof location.title location.metadata.page_title location.name %}
+        <div>{% firstof location.title location.metadata.page_title location.name %}</div>
+        <a class="change-location-button" href="/">
+            <span>{% trans "Change location" %}</span>
+            <i class="fa fa-crosshairs"></i>
+        </a>
+
     </div>
 
     <h1 class="quick-links">{% trans "Important information:" %}</h1>
@@ -15,7 +20,7 @@
                 <a href="{% url 'simple_ui:important-info' slug=location.slug info_slug=info.slug %}"
                    class="important-information-item {% if info.slug == important_info.slug %}active{% endif %}">
                     <div class="important-information-item-inner">
-                    {{ info.metadata.page_title }}
+                        {{ info.metadata.page_title }}
                     </div>
                 </a>
             {% endif %}
@@ -32,12 +37,15 @@
             </div>
         {% endfor %}
 
+        {% if location.content %}
+            <div class="general-info-divider"></div>
+        {% endif %}
+
         {% for p in location.content %}
             {% if p.important %}
                 <div class="general-info-item">
                     <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"/>
                     <label class="general-info-item-header" for="checkbox-{{ p.index }}">
-                        <span class="direction-filler"></span>
                         <i class="fa {{ p.vector_icon }}"></i>
                         <span>{{ p.title }}</span>
                     </label>
@@ -49,9 +57,9 @@
         {% for p in location.content %}
             {% if not p.important %}
                 <div class="general-info-item {% if p.hide_from_toc and p.anchor_name %} hide-from-toc" id="{{ p.anchor_name }}{% endif %}">
-                    <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion" {% if p.hide_from_toc and p.anchor_name %}checked{% endif %}/>
+                    <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"
+                           {% if p.hide_from_toc and p.anchor_name %}checked{% endif %}/>
                     <label class="general-info-item-header" for="checkbox-{{ p.index }}">
-                        <span class="direction-filler"></span>
                         <i class="fa {{ p.vector_icon }}"></i>
                         <span>{{ p.title }}</span>
                     </label>
