@@ -320,12 +320,16 @@ p {
 .title-bar {
   @include flexbox();
   @include align-items(center);
+  @include justify-content(space-between);
   white-space: nowrap;
   background-color: $location-header-color;
   color: $text-color;
   font-size: 20px;
   padding: 10px 15px;
   margin: 0 0 15px 0;
+  div {
+    flex: 1
+  }
 }
 
 .version-notification {
@@ -352,9 +356,6 @@ p {
 }
 
 .general-info-container {
-  margin: 10px 0;
-  border-top: 1px solid $divider-color-2;
-  border-bottom: 1px solid $divider-color-2;
 
   @media (max-width: $screen-xs-max) {
     padding: 10px;
@@ -393,7 +394,7 @@ p {
 
 .general-info-divider {
   width: 100%;
-  border-top: 1px solid $divider-color-2;
+  border-top: 1px solid $divider-color;
 }
 
 .general-info-item {
@@ -412,8 +413,8 @@ p {
   &.hide-from-toc {
     display: none;
     &:target {
-      .general-info-item-header{
-          background-color: $location-header-color;
+      .general-info-item-header {
+        background-color: $location-header-color;
       }
       display: block;
     }
@@ -431,8 +432,7 @@ p {
   text-align: center;
   cursor: pointer;
   background-color: transparent;
-  border-top: 1px solid $divider-color-2;
-  border-bottom: 1px solid $divider-color-2;
+  border-bottom: 1px solid $divider-color;
   &:hover {
     background-color: $primary-color-5;
   }
@@ -546,6 +546,17 @@ h3.anchor {
   margin-bottom: 2px;
 }
 
+.border-table {
+  .country-cell {
+    white-space: nowrap;
+    min-width: 200px;
+  }
+  .country-flag {
+    width: 25px;
+    margin-right: 5px;
+  }
+}
+
 a.link-button {
   @include transition-mixin(background-color, 0.15, linear);
   background-color: $green-accent-color;
@@ -555,7 +566,6 @@ a.link-button {
   text-align: center;
   text-decoration: none;
   padding: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
   &:hover {
     background-color: $green-accent-color-dark;
   }
@@ -563,14 +573,14 @@ a.link-button {
 
 a.link-button-reversed {
   @include transition-mixin(background-color, 0.15, linear);
-  background-color: #FFFFFF;
-  color: $text-color !important;
+  background-color: white !important;
+  border: 1px $green-accent-color solid !important;
+  color: $green-accent-color !important;
   display: block;
   font-size: 14px;
   text-align: center;
   text-decoration: none;
   padding: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
 
   &:hover {
     background-color: #e2e2e2;
@@ -581,8 +591,7 @@ a.link-button-reversed {
 .general-info-item-content {
   padding: 10px 0;
   color: $text-color-muted;
-  border-top: 1px solid $divider-color-2;
-  border-bottom: 1px solid $divider-color-2;
+  border-bottom: 1px solid $divider-color;
   img {
     max-width: 100%;
   }
@@ -849,10 +858,10 @@ a.location-closest {
     color: $text-color-muted;
     text-decoration: underline;
   }
-  .divider{
+  .divider {
     border-bottom: 1px $divider-color solid;
-    margin-bottom:15px;
-    margin-top:15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
   }
 }
 
@@ -869,6 +878,31 @@ footer {
   }
 }
 
-.align-center{
+.align-center {
   text-align: center;
+}
+
+.change-location-button {
+  @include flexbox();
+  @include align-items(center);
+  @include justify-content(flex-end);
+  @include flex-direction(row);
+  color: $green-accent-color !important;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  i {
+    display: block;
+    padding: 0 10px;
+  }
+  span {
+    display: block;
+  }
+  &:hover {
+    color: $green-accent-color-dark !important;
+  }
+  @media (max-width: $screen-xs-max) {
+    display: none;
+  }
 }
