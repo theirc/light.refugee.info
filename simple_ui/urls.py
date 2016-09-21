@@ -20,6 +20,6 @@ from . import views
 urlpatterns = [
     url(r'about/$', views.about, name='about'),
     url(r'^(?P<slug>[a-zA-Z\-0-9]+)/$', views.content, name='home'),
-    url(r'^(?P<slug>[a-zA-Z\-0-9]+)/info/(?P<info_slug>[a-zA-Z\-0-9]+)$', views.content, name='important-info'),
+    url(r'^(?P<slug>[a-zA-Z\-0-9]+)/info/(?P<info_slug>[a-zA-Z\-0-9]+)', views.content, name='important-info'),
     url(r'$', views.home, ),
 ]

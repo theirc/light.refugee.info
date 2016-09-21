@@ -1,13 +1,15 @@
 import os
-from urllib.parse import quote_plus
-
 import requests
+
+from urllib.parse import quote_plus, urlparse
+from dateutil import parser
+
 from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render
 from django.template import RequestContext
 from django.utils.translation import activate
-from dateutil import parser
+from django.shortcuts import redirect
 
 
 def home(request):
@@ -120,6 +122,14 @@ def content(request, slug, language=None, info_slug=None):
     else:
         ip = request.META.get('REMOTE_ADDR')
 
+    # Check if location has changed
+    if request.META.get('HTTP_REFERER'):
+        url_path = urlparse(request.META.get('HTTP_REFERER')).path.split("/")
+        previous_location = url_path[2]
+        new_location = slug
+        if (previous_location != new_location) and info_slug:
+            print('changed location')
+            return redirect('/' + previous_location + '/info/' + info_slug)
     # Url is actually a filter in the regions for the slug we are looking for
     region_url = "{}?slug={}".format(os.path.join(settings.API_URL, 'v1/region/'), slug)
     information_url = "{}?slug={}".format(os.path.join(settings.API_URL, 'v1/important-information/'), slug)
@@ -158,6 +168,10 @@ def content(request, slug, language=None, info_slug=None):
 
     region = region if 'content' in region and region['content'] else region_en
 
+    # sort region important info, because order is random
+    if region['important_information']:
+        region['important_information'].sort(key=lambda x: x['id'])
+
     feedback_url = ""
     try:
         feedback_url = settings.FEEDBACK_URL.get(user_language, settings.FEEDBACK_URL.get('en', '/'))
@@ -183,7 +197,6 @@ def content(request, slug, language=None, info_slug=None):
             'has_important': True if [r for r in region['content'] if r['important']] else False,
         }
     )
-
     if info_slug:
         context.update({
             'important_info': next((info for info in region['important_information'] if info['slug'] == info_slug), None)
