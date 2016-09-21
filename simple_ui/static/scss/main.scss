@@ -581,10 +581,14 @@ a.link-button-reversed {
   text-align: center;
   text-decoration: none;
   padding: 12px;
-
   &:hover {
-    background-color: #e2e2e2;
+    background-color: $green-accent-color !important;
+    color: white !important;
   }
+}
+img.img-centered {
+  display: block;
+  margin: 0 auto;
 }
 
 // general info
