@@ -124,8 +124,8 @@ def content(request, slug, language=None, info_slug=None):
         ip = request.META.get('REMOTE_ADDR')
 
     # Check if location has changed
-    if request.META.get('HTTP_REFERER'):
-        url_path = urlparse(request.META.get('HTTP_REFERER')).path.split("/")
+    if request.COOKIES.get('previous_url'):
+        url_path = urlparse(request.COOKIES.get('previous_url')).path.split("/")
         previous_location = url_path[2]
         new_location = slug
         if (previous_location != new_location) and info_slug:
@@ -210,6 +210,7 @@ def content(request, slug, language=None, info_slug=None):
         RequestContext(request)
     )
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+    response.set_cookie('previous_url', request.path)
     return response
 
 
