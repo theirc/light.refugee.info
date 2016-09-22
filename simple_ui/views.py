@@ -10,6 +10,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.utils.translation import activate
 from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 
 def home(request):
@@ -128,8 +129,8 @@ def content(request, slug, language=None, info_slug=None):
         previous_location = url_path[2]
         new_location = slug
         if (previous_location != new_location) and info_slug:
-            print('changed location')
-            return redirect('/' + previous_location + '/info/' + info_slug)
+            return redirect(reverse('simple_ui:important-info', kwargs={'slug': previous_location, 'info_slug': info_slug}))
+
     # Url is actually a filter in the regions for the slug we are looking for
     region_url = "{}?slug={}".format(os.path.join(settings.API_URL, 'v1/region/'), slug)
     information_url = "{}?slug={}".format(os.path.join(settings.API_URL, 'v1/important-information/'), slug)
