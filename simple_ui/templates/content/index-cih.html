@@ -5,7 +5,7 @@
 {% load l10n %}
 {% block content %}
     <div class="row title-bar">
-        <div><a href="{{ location.slug }}">{% firstof location.title location.metadata.page_title location.name %}</a></div>
+        <div><a href="/{{ location.slug }}/">{% firstof location.title location.metadata.page_title location.name %}</a></div>
         <a class="change-location-button" href="/">
             <span>{% trans "Change location" %}</span>
             <i class="fa fa-crosshairs"></i>
