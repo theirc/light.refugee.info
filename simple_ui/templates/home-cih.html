@@ -43,12 +43,12 @@
             <div class="location-accordion">
                 <ul>
                     <li>
-                        <input type="checkbox" id="checkbox-{{ r.id }}" name="checkbox-accordion"/>
                         <label for="checkbox-{{ r.id }}">
                             <div class="direction-filler"></div>
                             <img class="location-flag" src="{% static 'images/flags' %}/{{ r.code | lower }}.png"/>
                             <span class="location-label-name">{% firstof r.title  r.metadata.page_title r.name %}</span>
                         </label>
+                        <input type="checkbox" id="checkbox-{{ r.id }}" name="checkbox-accordion"/>
                         <div class="content">
                             {% if not r.hidden %}
                                 <a class="location location-country"
