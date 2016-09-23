@@ -44,11 +44,11 @@
         {% for p in location.content %}
             {% if p.important %}
                 <div class="general-info-item">
-                    <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"/>
                     <label class="general-info-item-header" for="checkbox-{{ p.index }}">
                         <i class="fa {{ p.vector_icon }}"></i>
                         <span>{{ p.title }}</span>
                     </label>
+                    <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"/>
                     <div class="general-info-item-content">{{ p.section|safe }}</div>
                 </div>
             {% endif %}
@@ -57,12 +57,12 @@
         {% for p in location.content %}
             {% if not p.important %}
                 <div class="general-info-item {% if p.hide_from_toc and p.anchor_name %} hide-from-toc" id="{{ p.anchor_name }}{% endif %}">
-                    <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"
-                           {% if p.hide_from_toc and p.anchor_name %}checked{% endif %}/>
                     <label class="general-info-item-header" for="checkbox-{{ p.index }}">
                         <i class="fa {{ p.vector_icon }}"></i>
                         <span>{{ p.title }}</span>
                     </label>
+                    <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"
+                           {% if p.hide_from_toc and p.anchor_name %}checked{% endif %}/>
                     <div class="general-info-item-content">{{ p.section|safe }}</div>
                 </div>
             {% endif %}

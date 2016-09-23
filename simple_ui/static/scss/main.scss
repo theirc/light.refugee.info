@@ -402,11 +402,11 @@ p {
     display: none;
   }
 
-  [type=radio], [type=checkbox] {
+  input {
     display: none;
   }
 
-  [type=checkbox]:checked ~ label ~ .general-info-item-content {
+  input:checked + .general-info-item-content {
     display: block;
   }
 
@@ -649,6 +649,7 @@ img.img-centered {
   margin: 0 !important;
   cursor: pointer;
   font-size: 12px;
+  text-align: center;
   &:hover {
     background-color: $primary-color-5;
   }
@@ -750,11 +751,11 @@ img.img-centered {
     transform-origin: top;
   }
 
-  [type=radio], [type=checkbox] {
+  input {
     display: none;
   }
 
-  [type=checkbox]:checked ~ label ~ .content {
+  input:checked + .content {
     height: auto;
     transform: scaleY(1);
     .location-helper {
