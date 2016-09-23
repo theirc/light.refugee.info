@@ -21,10 +21,8 @@ from django.conf.urls.static import static
 urlpatterns = [
                   url(r'^imaging/', include('imaging.urls')),
                   url(r'^', include('rss_ui.urls')),
-              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+                  url(r'^', include('simple_ui.urls', namespace='simple_ui'))
 
-urlpatterns += i18n_patterns(
-    url(r'^', include('simple_ui.urls', namespace='simple_ui'))
-)
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = 'root.views.redirect_to_home'

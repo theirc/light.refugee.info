@@ -31,7 +31,7 @@
                 {% for language in languages %}
                     <li>
                         <a class="{% if not forloop.last %}border-language{% endif %}"
-                           href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}" lang="{{ language.code }}">
+                           href="/{{ language.code }}{{ request.get_full_path }}" lang="{{ language.code }}">
                             {{ language.name_local }}
                         </a>
                     </li>
@@ -56,7 +56,7 @@
             </a>
             <p class="section-header">{% trans "Change language" %}</p>
             {% for language in languages %}
-                <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+                <a href="/{{ language.code }}{{ request.get_full_path }}"
                    lang="{{ language.code }}">
                     {{ language.name_local }}
                 </a>

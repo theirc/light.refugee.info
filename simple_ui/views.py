@@ -5,7 +5,7 @@ from urllib.parse import quote_plus, urlparse
 from dateutil import parser
 
 from django.conf import settings
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
 from django.utils.translation import activate
@@ -126,10 +126,12 @@ def content(request, slug, language=None, info_slug=None):
     # Check if location has changed
     if request.COOKIES.get('previous_url'):
         url_path = urlparse(request.COOKIES.get('previous_url')).path.split("/")
-        previous_location = url_path[2]
-        new_location = slug
-        if (previous_location != new_location) and info_slug:
-            return redirect(reverse('simple_ui:important-info', kwargs={'slug': previous_location, 'info_slug': info_slug}))
+        previous_location = url_path[1]
+        if (previous_location != slug) and info_slug:
+            return redirect(reverse(
+                'simple_ui:important-info',
+                kwargs={'slug': previous_location, 'info_slug': info_slug}
+            ))
 
     # Url is actually a filter in the regions for the slug we are looking for
     region_url = "{}?slug={}".format(os.path.join(settings.API_URL, 'v1/region/'), slug)
@@ -233,6 +235,8 @@ def about(request):
 def find_language(request, language=None):
     if language:
         user_language = language[0:2]
+    elif request.session.get('django_language'):
+        user_language = request.session.get('django_language')
     elif request.LANGUAGE_CODE:
         user_language = request.LANGUAGE_CODE
     elif 'HTTP_ACCEPT_LANGUAGE' in request.META:
@@ -244,3 +248,10 @@ def find_language(request, language=None):
     else:
         user_language = 'en'
     return user_language
+
+
+def change_language(request, language_code, url=None):
+    if language_code:
+        response = HttpResponseRedirect('/' + (url or ''))
+        response.set_cookie('django_language', language_code)
+        return response
