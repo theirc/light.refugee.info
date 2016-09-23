@@ -5,7 +5,7 @@
 {% load l10n %}
 {% block content %}
     <div class="row title-bar">
-        <div>{% firstof location.title location.metadata.page_title location.name %}</div>
+        <div><a href="{{ location.slug }}">{% firstof location.title location.metadata.page_title location.name %}</a></div>
         <a class="change-location-button" href="/">
             <span>{% trans "Change location" %}</span>
             <i class="fa fa-crosshairs"></i>
@@ -28,50 +28,51 @@
     </div>
     <div class="row green-bar" style="margin-top: 10px">{{ important_info.metadata.page_title }}</div>
     <div class="general-info-container">{% for i in important_info.content %}{{ i.section | safe }}{% endfor %}</div>
-
-    <div class="general-info-container">
-
-        {% for b in location.metadata.banners %}
-            <div class="general-info-box">
-                {{ b|safe }}
-            </div>
-        {% endfor %}
-
-        {% if location.content %}
-            <div class="general-info-divider"></div>
-        {% endif %}
-
-        {% for p in location.content %}
-            {% if p.important %}
-                <div class="general-info-item">
-                    <label class="general-info-item-header" for="checkbox-{{ p.index }}">
-                        <i class="fa {{ p.vector_icon }}"></i>
-                        <span>{{ p.title }}</span>
-                    </label>
-                    <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"/>
-                    <div class="general-info-item-content">{{ p.section|safe }}</div>
+    {% if not important_info %}
+        <div class="general-info-container">
+    
+            {% for b in location.metadata.banners %}
+                <div class="general-info-box">
+                    {{ b|safe }}
                 </div>
+            {% endfor %}
+    
+            {% if location.content %}
+                <div class="general-info-divider"></div>
             {% endif %}
-        {% endfor %}
-
-        {% for p in location.content %}
-            {% if not p.important %}
-                <div class="general-info-item {% if p.hide_from_toc and p.anchor_name %} hide-from-toc" id="{{ p.anchor_name }}{% endif %}">
-                    <label class="general-info-item-header" for="checkbox-{{ p.index }}">
-                        <i class="fa {{ p.vector_icon }}"></i>
-                        <span>{{ p.title }}</span>
-                    </label>
-                    <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"
-                           {% if p.hide_from_toc and p.anchor_name %}checked{% endif %}/>
-                    <div class="general-info-item-content">{{ p.section|safe }}</div>
-                </div>
+    
+            {% for p in location.content %}
+                {% if p.important %}
+                    <div class="general-info-item">
+                        <label class="general-info-item-header" for="checkbox-{{ p.index }}">
+                            <i class="fa {{ p.vector_icon }}"></i>
+                            <span>{{ p.title }}</span>
+                        </label>
+                        <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"/>
+                        <div class="general-info-item-content">{{ p.section|safe }}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+    
+            {% for p in location.content %}
+                {% if not p.important %}
+                    <div class="general-info-item {% if p.hide_from_toc and p.anchor_name %} hide-from-toc" id="{{ p.anchor_name }}{% endif %}">
+                        <label class="general-info-item-header" for="checkbox-{{ p.index }}">
+                            <i class="fa {{ p.vector_icon }}"></i>
+                            <span>{{ p.title }}</span>
+                        </label>
+                        <input type="checkbox" id="checkbox-{{ p.index }}" name="checkbox-accordion"
+                               {% if p.hide_from_toc and p.anchor_name %}checked{% endif %}/>
+                        <div class="general-info-item-content">{{ p.section|safe }}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+    
+            {% if publication_date %}
+                <p class="general-info-date" data-date="{{ publication_date|utc|date:'c' }}">
+                    {% trans "Last updated on:" %} {{ publication_date|utc|localize }} UTC
+                </p>
             {% endif %}
-        {% endfor %}
-
-        {% if publication_date %}
-            <p class="general-info-date" data-date="{{ publication_date|utc|date:'c' }}">
-                {% trans "Last updated on:" %} {{ publication_date|utc|localize }} UTC
-            </p>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
 {% endblock content %}
