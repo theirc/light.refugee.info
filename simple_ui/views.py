@@ -198,6 +198,7 @@ def content(request, slug, language=None, info_slug=None):
             'publication_date': publication_date,
             'is_blue': is_blue,
             'has_important': True if [info for info in region['important_information'] if not info['hidden']] else False,
+            'location_name': region.get('title') or region.get('metadata').get('page_title') or region.get('name')
         }
     )
     if info_slug:

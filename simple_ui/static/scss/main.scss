@@ -331,6 +331,10 @@ p {
     flex: 1
   }
 }
+.info-bar {
+  margin: 0;
+  padding: 10px 15px;
+}
 
 .version-notification {
   @include flexbox();
@@ -380,7 +384,7 @@ p {
 .quick-links {
   font-weight: normal;
   font-size: 20px;
-  margin: 20px 0 5px 0;
+  margin: 15px 0 5px 0;
 
 }
 
