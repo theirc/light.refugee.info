@@ -18,7 +18,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'about/$', views.about, name='about'),
+    url(r'^about/$', views.about, name='about'),
     url(r'^(?P<language_code>[a-z]{2})/$', views.change_language, name='change_language'),
     url(r'^(?P<language_code>[a-z]{2})/(?P<url>.+)', views.change_language, name='change_language'),
     url(r'^(?P<slug>[a-zA-Z\-0-9]+)/$', views.content, name='home'),

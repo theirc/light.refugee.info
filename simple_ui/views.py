@@ -217,8 +217,8 @@ def content(request, slug, language=None, info_slug=None):
     return response
 
 
-def about(request):
-    user_language = find_language(request)
+def about(request, language=None):
+    user_language = find_language(request, language=language)
 
     activate(user_language)
 
