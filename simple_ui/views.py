@@ -197,7 +197,7 @@ def content(request, slug, language=None, info_slug=None):
             'location': region,
             'publication_date': publication_date,
             'is_blue': is_blue,
-            'has_important': True if [r for r in region['content'] if r['important']] else False,
+            'has_important': True if [info for info in region['important_information'] if not info['hidden']] else False,
         }
     )
     if info_slug:

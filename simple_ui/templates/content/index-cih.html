@@ -5,7 +5,9 @@
 {% load l10n %}
 {% block content %}
     <div class="row title-bar">
-        <div><a href="/{{ location.slug }}/">{% firstof location.title location.metadata.page_title location.name %}</a></div>
+        <div>
+            <a href="/{{ location.slug }}/">{% firstof location.title location.metadata.page_title location.name %}</a>
+        </div>
         <a class="change-location-button" href="/">
             <span>{% trans "Change location" %}</span>
             <i class="fa fa-crosshairs"></i>
@@ -13,34 +15,36 @@
 
     </div>
 
-    <h1 class="quick-links">{% trans "Important information:" %}</h1>
-    <div class="important-information-container">
-        {% for info in location.important_information %}
-            {% if not info.hidden %}
-                <a href="{% url 'simple_ui:important-info' slug=location.slug info_slug=info.slug %}"
-                   class="important-information-item {% if info.slug == important_info.slug %}active{% endif %}">
-                    <div class="important-information-item-inner">
-                        {{ info.metadata.page_title }}
-                    </div>
-                </a>
-            {% endif %}
-        {% endfor %}
-    </div>
+    {% if has_important %}
+        <h1 class="quick-links">{% trans "Important information:" %}</h1>
+        <div class="important-information-container">
+            {% for info in location.important_information %}
+                {% if not info.hidden %}
+                    <a href="{% url 'simple_ui:important-info' slug=location.slug info_slug=info.slug %}"
+                       class="important-information-item {% if info.slug == important_info.slug %}active{% endif %}">
+                        <div class="important-information-item-inner">
+                            {{ info.metadata.page_title }}
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
     <div class="row green-bar" style="margin-top: 10px">{{ important_info.metadata.page_title }}</div>
     <div class="general-info-container">{% for i in important_info.content %}{{ i.section | safe }}{% endfor %}</div>
     {% if not important_info %}
         <div class="general-info-container">
-    
+
             {% for b in location.metadata.banners %}
                 <div class="general-info-box">
                     {{ b|safe }}
                 </div>
             {% endfor %}
-    
+
             {% if location.content %}
                 <div class="general-info-divider"></div>
             {% endif %}
-    
+
             {% for p in location.content %}
                 {% if p.important %}
                     <div class="general-info-item">
@@ -53,7 +57,7 @@
                     </div>
                 {% endif %}
             {% endfor %}
-    
+
             {% for p in location.content %}
                 {% if not p.important %}
                     <div class="general-info-item {% if p.hide_from_toc and p.anchor_name %} hide-from-toc" id="{{ p.anchor_name }}{% endif %}">
@@ -67,7 +71,7 @@
                     </div>
                 {% endif %}
             {% endfor %}
-    
+
             {% if publication_date %}
                 <p class="general-info-date" data-date="{{ publication_date|utc|date:'c' }}">
                     {% trans "Last updated on:" %} {{ publication_date|utc|localize }} UTC
