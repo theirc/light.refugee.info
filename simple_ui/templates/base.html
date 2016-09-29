@@ -1,5 +1,4 @@
 {% load static %}
-{% load compress %}
 {% load i18n %}
 {% load helper_tags %}
 {% get_current_language as LANGUAGE_CODE %}
@@ -28,9 +27,8 @@
     <meta name="msapplication-config" content="{% static 'images/favicons/browserconfig.xml' %}">
     <meta name="theme-color" content="#FFFFFF">
 
-    {% compress css %}
-        <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/main.scss' %}">
-    {% endcompress %}
+    <link rel="stylesheet" type="text/css" href="{% static 'scss/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{{ WEB_URL }}/static/scss/content.css">
 
     {% block additional-requirements %}{% endblock %}
 

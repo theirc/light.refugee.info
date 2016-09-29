@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'compressor',
-
     'simple_ui',
     'rss_ui',
     'imaging',
@@ -74,6 +72,7 @@ TEMPLATES = [
                 'django.core.context_processors.tz',
                 'django.core.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+                'root.context_processors.url_context_processor'
             ],
         },
     },
@@ -140,7 +139,6 @@ STATICFILES_DIRS = [
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder'
 ]
 
 LOCALE_PATHS = (
@@ -148,6 +146,8 @@ LOCALE_PATHS = (
 )
 
 API_URL = os.environ.get('API_URL', 'http://api.refugee.info')
+WEB_URL = os.environ.get('WEB_URL', 'http://dev.refugee.info')
+
 BLUE_PAGES = os.environ.get('BLUE_PAGES', 'serbia').split(';')
 
 
@@ -179,12 +179,6 @@ else:
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
-
-COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'sass --scss {infile} {outfile}'),
-)
 
 try:
     from .localsettings import *

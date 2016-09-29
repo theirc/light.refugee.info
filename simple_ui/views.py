@@ -77,7 +77,6 @@ def home(request):
             'national_languages': [(k, v) for k, v in settings.LANGUAGES if k not in ('ar', 'fa', 'en')],
             'regions': parents,
             'closest': closest,
-            'API_URL': settings.API_URL,
         },
         RequestContext(request)
     )
